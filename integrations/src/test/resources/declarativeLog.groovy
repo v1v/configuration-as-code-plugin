@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('error') {
             steps {
-                myerror([timeout: 1])
+                log1 level: "INFO", text: "foo"
             }
         }
     }

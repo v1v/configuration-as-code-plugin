@@ -29,9 +29,10 @@ public class V1vTest {
         assertEquals("jenkins-pipeline-lib", library.getName());
 
         WorkflowJob job = j.jenkins.createProject(WorkflowJob.class, "echo");
-        job.setDefinition(new CpsFlowDefinition(fileContentsFromResources("log.groovy")));
+        job.setDefinition(new CpsFlowDefinition(fileContentsFromResources("something.groovy")));
         WorkflowRun build = job.scheduleBuild2(0).get();
         j.assertBuildStatus(Result.FAILURE, build);
+        j.assertLogContains("[INFO] foo", build);
         j.assertLogContains("ERROR: Forcing error", build);
     }
 
@@ -46,7 +47,9 @@ public class V1vTest {
         job.setDefinition(new CpsFlowDefinition(fileContentsFromResources("declarativeLog.groovy")));
         WorkflowRun build = job.scheduleBuild2(0).get();
         j.assertBuildStatus(Result.FAILURE, build);
+        j.assertLogContains("[INFO] foo", build);
         j.assertLogContains("ERROR: Forcing error", build);
+        System.out.println(build.getLog());
     }
 
     String fileContentsFromResources(String fileName) throws IOException {
