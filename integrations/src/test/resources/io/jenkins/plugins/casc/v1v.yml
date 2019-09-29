@@ -1,0 +1,11 @@
+unclassified:
+  globalLibraries:
+    libraries:
+      - name: "jenkins-pipeline-lib"
+        defaultVersion: "master"
+        implicit: true
+        retriever:
+          modernSCM:
+            scm:
+              git:
+                remote: "file:///Users/vmartinez/work/src/github.com/v1v/super-library"
